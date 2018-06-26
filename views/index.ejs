@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Next Episode api</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+	<div class="showlist">
+		<%
+		if(shows !== null){
+			for(show in shows){%>
+			<div class="mylist"><div class="title"><%=show%></div>
+				<%
+				if(shows[show] !== null){
+					for(det in shows[show]){if(det !== 'id'){%>
+					<span class="details <%=det%>"><%=det+":"+shows[show][det];%></span>
+					<%}}
+				}%><button class="aButton" onclick="rmMyList(<%=shows[show]['id']+",'"+show.replace("'","")+"'"%>)">Delete</button></div><%
+			}
+		}%>
+	</div>
+
+	<div class = "searchbar">
+		<form method="get" action="search">
+			Search Series<input type="text" name="searchname"
+			value='<%if(search !== null)%><%=search%>'>
+			Page number<input type="number" name="page"
+			value=<%if(page !== null){%>
+			<%=page%>
+			<%}else{%>
+			<%='1'%>
+			<%}%>>
+			<input type="submit" value="Search" class="aButton">
+			<input type="hidden" name="user" value="<%=user%>">
+		</form>
+	</div>
+
+	<div class="searches">
+		<%if(results !== null){
+			for(show in results){%>
+			<div class="showsSearch" onclick="add(<%=results[show]+",this"%>)">
+				<%=show%>	
+			</div>
+			<%}
+		}%>
+	</div>
+	<div id="selectedSearch">
+		<form method="post" id='searchListForm' action="save">
+			<input type="submit" value="Add" class="aButton">
+			<input type="hidden" name="user" value="<%=user%>">
+		</form>
+
+	</div>
+	<div class = "removefromlist">
+		<form id="removeme" method="post" action="remove" onsubmit="return confirm('Are you sure you want to delete these');">
+			<input type="submit" value="Remove" class="aButton">
+			<input type="hidden" name="user" value="<%=user%>">
+		</form>
+	</div>
+	<a href="/" class="home">Home</a>
+	<script type="text/javascript">
+		function add(id,element){
+			var exist = document.getElementById(id)
+			if(!exist){
+				var form = document.getElementById("searchListForm")
+				var views = document.getElementById("selectedSearch")
+				views.style.display = 'block'
+				var elem = document.createElement("input")
+				elem.name = "selected"
+				elem.type = "hidden"
+				elem.value = id
+				elem.id = id
+				form.appendChild(elem);
+				var newitem = document.createElement("p")
+				newitem.id = "show"+id
+				newitem.innerHTML = element.innerHTML
+				newitem.addEventListener('click',function(){
+					var form = document.getElementById("searchListForm")
+					var views = document.getElementById("selectedSearch")
+					var elem = document.getElementById(id)
+					var newitem = document.getElementById("show"+id)
+					form.removeChild(elem)
+					views.removeChild(newitem)
+				});
+				views.appendChild(newitem)
+			}
+		}
+
+		function rmMyList(id,name){
+			var exist = document.getElementById(id)
+			if(!exist){
+				var removelist = document.getElementById('removeme')
+				removelist.style.display = 'block'
+				var newitem = document.createElement('input')
+				var newdiv = document.createElement('p')
+				newdiv.id = id
+				newitem.type = "hidden"
+				newdiv.innerHTML = name
+				newitem.value = id
+				newitem.name = "selected"
+				newdiv.appendChild(newitem)
+				newdiv.addEventListener('click',function(){
+					var changedmymind = document.getElementById(id)
+					removelist.removeChild(changedmymind)
+				})
+				removelist.appendChild(newdiv)
+			}
+		}
+		</script>
+	</body>
+	</html>

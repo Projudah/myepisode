@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Next Episode</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+	<form method = 'get', action="home">
+		<%
+		if(users !== null){
+			for(item in users){
+				%>
+				<input class="bButton" name='user' type="submit" value='<%=users[item].substring(0,users[item].lastIndexOf('.'))%>'>
+				<%
+			}
+		}
+		%>
+	</form>
+	<form method='post' action='add'>
+		<button class="bButton" onclick="show()">Add new user</button>
+		<div id="newuser" style="display: none;">
+			<input type="text" name="name" placeholder="John" required>
+			<input type="submit" value="Add">
+		</div>
+	</form>
+	<script type="text/javascript">
+		function show(){
+			elem = document.getElementById('newuser')
+			elem.style.display = 'block'
+		}
+	</script>
+</body>
+</html>
