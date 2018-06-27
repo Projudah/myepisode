@@ -4,6 +4,7 @@ var fs = require('fs')
 var async = require('async')
 const app = express()
 const bodyParser = require('body-parser')
+const port = proocess.env.PORT || 3000;
 
 app.set('view engine','ejs')
 app.use(express.static('public'))
@@ -111,6 +112,6 @@ app.post('/remove', function(req,res){
 	}
 })
 
-app.listen(3000, function () {
-	console.log('listening on port 3000!')
+app.listen(port, function () {
+	console.log('app starting on port '+port)
 })
