@@ -4,7 +4,7 @@ var fs = require('fs')
 var async = require('async')
 const app = express()
 const bodyParser = require('body-parser')
-const port = proocess.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.set('view engine','ejs')
 app.use(express.static('public'))
