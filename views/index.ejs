@@ -3,20 +3,14 @@
 <head>
 	<title>Next Episode api</title>
 	<link rel="stylesheet" type="text/css" href="/style.css">
+	<link rel="stylesheet" type="text/css" href="/homepage.css">
 </head>
 <body>
-	<div class="showlist">
+	<div class="coming_next">
 		<%
-		if(shows !== null){
-			for(show in shows){%>
-			<div class="mylist"><div class="title"><%=show%></div>
-				<%
-				if(shows[show] !== null){
-					for(det in shows[show]){if(det !== 'id'){%>
-					<span class="details <%=det%>"><%=det+":"+shows[show][det];%></span>
-					<%}}
-				}%><button class="aButton" onclick="rmMyList(<%=shows[show]['id']+",'"+show.replace("'","")+"'"%>)">Delete</button></div><%
-			}
+		if(shows !== null){%>
+			<%-include('show_w_pic',{shows: shows}) %>
+			<%
 		}%>
 	</div>
 

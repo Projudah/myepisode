@@ -40,6 +40,8 @@ app.get('/home', function (req, res) {
 								var air={}
 								if(text.tvShow.countdown!==null) air=text.tvShow.countdown
 								if(air!==null)air["id"]=text.tvShow.id;
+								air['show_name']=name;
+								air['image'] = text.tvShow.image_path
 								listeps[name] = air
 								callback()
 							}

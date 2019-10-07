@@ -1,42 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap');
+
 body{
 	font-family: sans-serif;
-	background: #444;
+	background: #222;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .test{
 	color: blue;
 }
-.showlist{
-	color: white;
-}
-.mylist{
-	margin: 10px 0px;
-	background: #222;
-	padding: 10px;
-	min-height: 50px;
-	position: relative;
-}
+
+
 .aButton{
 	position: absolute;
 	right: 0px;
 	top: 0px;
 	border: none;
 	background: #933;
-	border-radius: 3px;
 	color: white;
-	padding: 5px 10px;
+	padding: 10px 20px;
 	cursor: pointer;
 }
 
-.bButton{
-	border: none;
-	background: #933;
-	border-radius: 3px;
-	color: white;
-	padding: 5px 10px;
-	cursor: pointer;
-	margin: 5px;
-}
 
 .details{
 	float: right;
