@@ -1,0 +1,38 @@
+.coming_next{
+	color: white;
+	height: 500px;
+	text-align: center;
+}
+.image{
+	display: inline-block;
+}
+.image img{
+	display: inline-block;
+	vertical-align: middle;
+	height: 400px;
+}
+.content{
+	height: 300px;
+	display: inline-block;
+}
+.title{
+	font-size: 3em;
+
+}
+.mylist{
+	/*margin: 10px 0px;*/
+	background: #222;
+	padding: 10px;
+}
+
+.det_container{
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+.det{
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	padding: 20px;
+	text-align: center;
+	font-size: 2em;
+}

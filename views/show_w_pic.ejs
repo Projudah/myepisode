@@ -1,0 +1,22 @@
+<%
+var next_show ={}
+for(show in shows){
+	if((shows[show]['air_date'] < next_show['air_date']) || next_show['air_date']==null){
+		next_show = shows[show];
+	}
+}
+%>
+<div class="mylist">
+	<div class='image'><img src="<%=next_show['image']%>"></div>
+	<div class='content'>
+		<div class="title"><%=next_show['show_name']%></div>
+		<div class='det_container'>
+			<p class="det episode">Episode: <%=next_show['episode']%> </p>
+			<p class="det name"><%=next_show['name']%> </p>
+			<p class="det season">Season: <%=next_show['season']%> </p>
+			<p class="det date">Date: <%=next_show['air_date']%> </p>
+		</div>
+
+		<!-- <button class="aButton" onclick="rmMyList(<%=next_show['id']+",'"+show.replace("'","")+"'"%>)">Delete</button> -->
+	</div>
+</div>
