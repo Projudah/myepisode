@@ -1,0 +1,16 @@
+<%
+var date_string = new Date(String(my_show['air_date']))
+var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
+%>
+<div class="mini_mylist">
+	<div class='mini_image'><img src="<%=my_show['image']%>"></div>
+	<div class='mini_content'>
+		<div class="mini_title"><%=my_show['show_name']%></div>
+		<div class='mini_det_container'>
+			<p class="mini_det episode">Ep <%=my_show['episode']%> S: <%=my_show['season']%> </p>
+			<p class="mini_det date"><%=date_string.toLocaleDateString('en-US',options)%> </p>
+		</div>
+
+		<!-- <button class="aButton" onclick="rmMyList(<%=my_show['id']+",'"+show.replace("'","")+"'"%>)">Delete</button> -->
+	</div>
+</div>

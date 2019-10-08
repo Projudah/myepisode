@@ -6,15 +6,41 @@
 	<link rel="stylesheet" type="text/css" href="/homepage.css">
 </head>
 <body>
-	<div class="coming_next">
+	<div class="content_section coming_next">
+		<p class='section_title'>COMING UP</p>
 		<%
 		if(shows !== null){%>
-			<%-include('show_w_pic',{shows: shows}) %>
-			<%
+		<%-include('show_w_pic',{shows: shows}) %>
+		<%}%>
+	</div>
+	<div class="content_section running">
+		<p class='section_title'>NOW AIRING</p>
+		<%
+		if(shows !== null){
+			for(show in shows){
+				if(shows[show]['air_date'] != null){
+				%>
+				<%-include('airing',{my_show: shows[show]}) %>
+				<%;
+			}
+			}
+		}%>
+	</div>
+	<div class="content_section unavailable">
+		<p class='section_title'>UNAVAILABLE</p>
+		<%
+		if(shows !== null){
+			for(show in shows){
+				if(shows[show]['air_date'] == null){
+				%>
+				<%-include('not_airing',{my_show: shows[show]}) %>
+				<%;
+			}
+			}
 		}%>
 	</div>
 
-	<div class = "searchbar">
+	<!-- <div class = "searchbar">
 		<form method="get" action="search">
 			Search Series<input type="text" name="searchname"
 			value='<%if(search !== null)%><%=search%>'>
@@ -50,7 +76,7 @@
 			<input type="submit" value="Remove" class="aButton">
 			<input type="hidden" name="user" value="<%=user%>">
 		</form>
-	</div>
+	</div> -->
 	<a href="/" class="home">Home</a>
 	<script type="text/javascript">
 		function add(id,element){
@@ -100,6 +126,6 @@
 				removelist.appendChild(newdiv)
 			}
 		}
-		</script>
-	</body>
-	</html>
+	</script>
+</body>
+</html>
