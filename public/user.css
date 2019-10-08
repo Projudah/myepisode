@@ -1,123 +1,251 @@
+@media screen and (max-width: 1000px) {
+    
+    .a_user{
+    	color: white;
+    	text-align: center;
+    	background: #f78239;
+    	height: 250px;
+    	width: 250px;
+    	padding: 0px;
+    	font-size: 3em;
+    	display: inline-block;
+    	line-height: 250px;
+    	vertical-align: middle;
+    	margin: 20px;
+    	box-shadow: -20px 20px rgba(0,0,0,0.2);
+    	text-transform: uppercase;
+    	transition-property: box-shadow, height, width, line-height;
+    	transition-duration: 0.5s;
+    }
+    .a_user:hover{
+    	box-shadow: -45px 45px rgba(0,0,0,0.1);
+    }
+    .add_user{
+    	background: #29bac2;
+    	font-size: 7em;
+    	font-weight: lighter;
+    }
+    .existing_user{
+    	background: #f78239;
+    }
+    .existing_user:hover{
+    	background: #ff9959;
+    	width: 300px;
+    	height: 300px;
+    	line-height: 300px;
+    }
+    .add_user:hover{
+    	background: #56cfd6;
+    	width: 300px;
+    	height: 300px;
+    	line-height: 300px;
+    }
+    
+    .back{
+    	background: #f78239;
+    	font-size: 3em;
+    	width: 200px;
+    	line-height: 100px;
+    	height: 100px;
+    	display: inline-block;
+    }
+    .back:hover{
+    	background: #ff9959;
+    	width: 250px;
+    }
+    .form{
+    	display: inline-block;
+    	background: #333;
+    	text-align: left;
+    	/*width: 500px;*/
+    	padding: 50px 50px;
+    	color: white;
+    	font-size: 2em;
+    	box-shadow: -20px 20px rgba(0,0,0,0.2);
+    }
+    .input_name{
+    	margin-right: 10px;
+    	padding: 0px 10px;
+    }
+    
+    p{
+    	padding: 0px;
+    	margin: 0px;
+    }
+    
+    a:link, a:visited, a:hover {
+    	text-decoration: none;
+    }
+    
+    .main_center{
+    	width: 100%;
+    	text-align: center;
+    	margin: 0 auto;
+    	position: relative;
+    	top: 50%;
+    	transform: translateY(-50%);
+    	min-height: 500px;
+    	height: auto;
+    }
+    
+    .container{
+    	min-width: 100%;
+    	margin: 0px;
+    	padding: 0px;
+    	position: absolute;
+    	/*display: flex;*/
+    	height: 100%;
+    }
+    
+    .title{
+    	color: white;
+    	font-size: 4em;
+    }
+    
+    html,body{
+    	margin: 0px;
+    	padding: 0px;
+    	font-size: 25px;    
+    	/*position: absolute;*/
+    	/*width: 100%;*/
+    	/*height: 100%;*/
+    }
+    
+    .addButton{
+    	border: none;
+    	background: #29bac2;
+    	color: white;
+    	padding: 10px 20px;
+    	cursor: pointer;
+    }
+    
+    .addButton:hover{
+    	background: #56cfd6;
+    }
+}
 
-.a_user{
-	color: white;
-	text-align: center;
-	background: #f78239;
-	height: 250px;
-	width: 250px;
-	padding: 0px;
-	font-size: 3em;
-	display: inline-block;
-	line-height: 250px;
-	vertical-align: middle;
-	margin: 20px;
-	box-shadow: -20px 20px rgba(0,0,0,0.2);
-	text-transform: uppercase;
-	transition-property: box-shadow, height, width, line-height;
-	transition-duration: 0.5s;
-}
-.a_user:hover{
-	box-shadow: -45px 45px rgba(0,0,0,0.1);
-}
-.add_user{
-	background: #29bac2;
-	font-size: 7em;
-	font-weight: lighter;
-}
-.existing_user{
-	background: #f78239;
-}
-.existing_user:hover{
-	background: #ff9959;
-	width: 300px;
-	height: 300px;
-	line-height: 300px;
-}
-.add_user:hover{
-	background: #56cfd6;
-	width: 300px;
-	height: 300px;
-	line-height: 300px;
-}
-
-.back{
-	background: #f78239;
-	font-size: 3em;
-	width: 200px;
-	line-height: 100px;
-	height: 100px;
-	display: inline-block;
-}
-.back:hover{
-	background: #ff9959;
-	width: 250px;
-}
-.form{
-	display: inline-block;
-	background: #333;
-	text-align: left;
-	/*width: 500px;*/
-	padding: 50px 50px;
-	color: white;
-	font-size: 2em;
-	box-shadow: -20px 20px rgba(0,0,0,0.2);
-}
-.input_name{
-	margin-right: 10px;
-	padding: 0px 10px;
-}
-
-p{
-	padding: 0px;
-	margin: 0px;
-}
-
-a:link, a:visited, a:hover {
-	text-decoration: none;
-}
-
-.main_center{
-	width: 100%;
-	text-align: center;
-	margin: 0 auto;
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	min-height: 500px;
-	height: auto;
-}
-
-.container{
-	min-width: 100%;
-	margin: 0px;
-	padding: 0px;
-	position: absolute;
-	/*display: flex;*/
-	height: 100%;
-}
-
-.title{
-	color: white;
-	font-size: 4em;
-}
-
-html,body{
-	margin: 0px;
-	padding: 0px;
-
-	/*position: absolute;*/
-	/*width: 100%;*/
-	/*height: 100%;*/
-}
-
-.addButton{
-	border: none;
-	background: #29bac2;
-	color: white;
-	padding: 10px 20px;
-	cursor: pointer;
-}
-
-.addButton:hover{
-	background: #56cfd6;
+@media (min-width: 1001px) {
+    
+    .a_user{
+    	color: white;
+    	text-align: center;
+    	background: #f78239;
+    	height: 250px;
+    	width: 250px;
+    	padding: 0px;
+    	font-size: 3em;
+    	display: inline-block;
+    	line-height: 250px;
+    	vertical-align: middle;
+    	margin: 20px;
+    	box-shadow: -20px 20px rgba(0,0,0,0.2);
+    	text-transform: uppercase;
+    	transition-property: box-shadow, height, width, line-height;
+    	transition-duration: 0.5s;
+    }
+    .a_user:hover{
+    	box-shadow: -45px 45px rgba(0,0,0,0.1);
+    }
+    .add_user{
+    	background: #29bac2;
+    	font-size: 7em;
+    	font-weight: lighter;
+    }
+    .existing_user{
+    	background: #f78239;
+    }
+    .existing_user:hover{
+    	background: #ff9959;
+    	width: 300px;
+    	height: 300px;
+    	line-height: 300px;
+    }
+    .add_user:hover{
+    	background: #56cfd6;
+    	width: 300px;
+    	height: 300px;
+    	line-height: 300px;
+    }
+    
+    .back{
+    	background: #f78239;
+    	font-size: 3em;
+    	width: 200px;
+    	line-height: 100px;
+    	height: 100px;
+    	display: inline-block;
+    }
+    .back:hover{
+    	background: #ff9959;
+    	width: 250px;
+    }
+    .form{
+    	display: inline-block;
+    	background: #333;
+    	text-align: left;
+    	/*width: 500px;*/
+    	padding: 50px 50px;
+    	color: white;
+    	font-size: 2em;
+    	box-shadow: -20px 20px rgba(0,0,0,0.2);
+    }
+    .input_name{
+    	margin-right: 10px;
+    	padding: 0px 10px;
+    }
+    
+    p{
+    	padding: 0px;
+    	margin: 0px;
+    }
+    
+    a:link, a:visited, a:hover {
+    	text-decoration: none;
+    }
+    
+    .main_center{
+    	width: 100%;
+    	text-align: center;
+    	margin: 0 auto;
+    	position: relative;
+    	top: 50%;
+    	transform: translateY(-50%);
+    	min-height: 500px;
+    	height: auto;
+    }
+    
+    .container{
+    	min-width: 100%;
+    	margin: 0px;
+    	padding: 0px;
+    	position: absolute;
+    	/*display: flex;*/
+    	height: 100%;
+    }
+    
+    .title{
+    	color: white;
+    	font-size: 4em;
+    }
+    
+    html,body{
+    	margin: 0px;
+    	padding: 0px;
+    
+    	/*position: absolute;*/
+    	/*width: 100%;*/
+    	/*height: 100%;*/
+    }
+    
+    .addButton{
+    	border: none;
+    	background: #29bac2;
+    	color: white;
+    	padding: 10px 20px;
+    	cursor: pointer;
+    }
+    
+    .addButton:hover{
+    	background: #56cfd6;
+    }
 }
