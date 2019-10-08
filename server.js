@@ -39,7 +39,7 @@ app.get('/home', function (req, res) {
 								var name = text.tvShow.name
 								var air={}
 								if(text.tvShow.countdown!==null) air=text.tvShow.countdown
-								if(air!==null)air["id"]=text.tvShow.id;
+									if(air!==null)air["id"]=text.tvShow.id;
 								air['show_name']=name;
 								air['image'] = text.tvShow.image_path
 								listeps[name] = air
@@ -64,9 +64,9 @@ app.get('/search', function (req, res) {
 		var bodyparse = JSON.parse(body)
 		var shows=bodyparse.tv_shows
 		for(var show in shows){
-			listshows[shows[show].name]=shows[show].id
+			listshows[shows[show].name]=shows[show]
 		}
-		res.render('index',{shows:null,error:false,results:listshows,search:name,page:page,user:user})
+		res.render('search_result',{shows:null,error:false,results:listshows,search:name,page:page,user:user})
 	})
 
 })

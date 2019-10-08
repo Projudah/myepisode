@@ -9,6 +9,7 @@ for(show in shows){
 }
 
 var date_string = new Date(String(next_show['air_date']))
+if(Object.keys(next_show).length){
 %>
 <div class="mylist">
 	<div class='image'><img src="<%=next_show['image']%>"></div>
@@ -20,6 +21,6 @@ var date_string = new Date(String(next_show['air_date']))
 			<p class="det date">Date: <%=date_string.toLocaleTimeString('en-US',options)%> </p>
 		</div>
 
-		<!-- <button class="aButton" onclick="rmMyList(<%=next_show['id']+",'"+show.replace("'","")+"'"%>)">Delete</button> -->
 	</div>
 </div>
+<%}%>

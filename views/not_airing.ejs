@@ -1,11 +1,19 @@
-<%
-var date_string = new Date(String(my_show['air_date']))
-var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
-%>
-<div class="mini_mylist">
+
+<div class="mini_mylist" onclick="rmMyList(<%=my_show['id']%>,'<%=user%>')">
 	<div class='mini_image'><img src="<%=my_show['image']%>"></div>
 	<div class='mini_content'>
 		<div class="mini_title"><%=my_show['show_name']%></div>
-		<!-- <button class="aButton" onclick="rmMyList(<%=my_show['id']+",'"+show.replace("'","")+"'"%>)">Delete</button> -->
 	</div>
 </div>
+
+<script type="text/javascript">
+	function rmMyList(id,name){
+		if(confirm("Are you sure you want to Delete this show?")){
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "remove", false);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("selected="+id+"&user="+name);
+			location.reload();
+		}
+	}
+</script>

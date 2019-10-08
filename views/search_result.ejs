@@ -6,7 +6,7 @@
 	rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="/style.css">
-	<link rel="stylesheet" type="text/css" href="/homepage.css">
+	<link rel="stylesheet" type="text/css" href="/searchlist.css">
 </head>
 <nav id='nav_group'>
 	<a href="/" ><i class="material-icons md-light md-48">swap_horiz</i></a>
@@ -22,10 +22,10 @@
 		<div class="collapse" id="deleteUser" data-parent="#nav_group">
 			<div class='button_basic red'>REMOVE USER</div>
 		</div>
-		<div class="collapse" id="searchShow" data-parent="#nav_group">
+		<div class="collapse show" id="searchShow" data-parent="#nav_group">
 			<form class='form_grid' method="get" action="search">
 				<div></div>
-				<input class='search_bar' type="text" name="searchname" placeholder="Search a Show...">
+				<input class='search_bar' type="text" name="searchname" placeholder="Search a Show..." value="<%=search%>">
 				<input type="hidden" name="user" value="<%=user%>">
 				<input type="hidden" name="page" value="1">
 				<button class='search_button'><i class="material-icons md-light md-48">search</i></button>
@@ -34,40 +34,20 @@
 	</div>
 </nav>
 <body>
-	<div class="content_section coming_next">
-		<p class='section_title'>COMING UP</p>
-		<%
-		if(shows !== null){%>
-		<%-include('show_w_pic',{shows: shows}) %>
-		<%}%>
-	</div>
-	<div class="content_section running">
-		<p class='section_title'>AIRING SOON</p>
-		<%
-		if(shows !== null){
-			for(show in shows){
-				if(shows[show]['air_date'] != null){
-					%>
-					<%-include('airing',{my_show: shows[show]}) %>
-					<%;
-				}
-			}
-		}%>
-	</div>
-	<div class="content_section unavailable">
-		<p class='section_title'>UNAVAILABLE</p>
-		<%
-		if(shows !== null){
-			for(show in shows){
-				if(shows[show]['air_date'] == null){
-					%>
-					<%-include('not_airing',{my_show: shows[show]}) %>
-					<%;
-				}
-			}
-		}%>
-	</div>
 
+	<div class="content_section running">
+		<p class='section_title'>RESULTS</p>
+		<%
+		if(results !== null){
+			// console.log(results)
+			for(show in results){%>
+			<%-include('not_added',{my_show: results[show]}) %>
+			<%}
+		}%>
+	</div>
+	<div class="content_section">
+		<a href="home?user=<%=user%>"><div class='button_basic default'>BACK HOME</div></a>
+	</div>
 	<!-- <div class = "searchbar">
 		<form method="get" action="search">
 			Search Series<input type="text" name="searchname"

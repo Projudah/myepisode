@@ -70,7 +70,7 @@
 	cursor: pointer;
 }
 .mini_mylist:hover:after{
-	content: 'REMOVE';
+	content: 'ADD';
 	position: absolute;
 	background: #111;
 	padding: 10px;
@@ -132,6 +132,13 @@
 }
 .red:hover{
 	background: #ba3127; 
+}
+
+.default{
+	background: #f78239; 
+}
+.default:hover{
+	background: #ff9959; 
 }
 
 .material-icons.md-18 { font-size: 18px; }
