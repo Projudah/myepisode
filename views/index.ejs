@@ -20,7 +20,11 @@
 	</a>
 	<div class='accordion-group'>
 		<div class="collapse" id="deleteUser" data-parent="#nav_group">
-			<div class='button_basic red'>REMOVE USER</div>
+			<form method="post" action="delete" id='delete'>
+				<input type="hidden" name="user" value="<%=user%>">
+			</form>
+			<button type='submit' form='delete' value='submit' class='button_basic red'>REMOVE USER</button>
+
 		</div>
 		<div class="collapse" id="searchShow" data-parent="#nav_group">
 			<form class='form_grid' method="get" action="search">

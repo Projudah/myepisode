@@ -9,8 +9,7 @@ for(show in shows){
 }
 
 var date_string = new Date(String(next_show['air_date']))
-if(Object.keys(next_show).length){
-%>
+if(Object.keys(next_show).length){%>
 <div class="mylist">
 	<div class='image'><img src="<%=next_show['image']%>"></div>
 	<div class='content'>
@@ -23,4 +22,16 @@ if(Object.keys(next_show).length){
 
 	</div>
 </div>
-<%}%>
+<script type="text/javascript">
+	function timedRefresh(timeoutPeriod) {
+		setTimeout("location.reload(true);",timeoutPeriod);
+	}
+	const now = new Date();
+	const thirty = 1800000;
+	const nextShow = new Date("<%=next_show['air_date']%>");
+	const timeToNext = (nextShow-now)+60000 //Arbitrarily adding a minute buffer for API to update times
+	window.onload = timedRefresh(Math.min(thirty, timeToNext || thirty));
+</script>
+<%
+}
+%>

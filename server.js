@@ -1,59 +1,140 @@
 const express = require('express')
 const request = require('request')
-var fs = require('fs')
 var async = require('async')
 const app = express()
 const bodyParser = require('body-parser')
+const { Client } = require('pg');
+require('dotenv').config();
+const queries = require('./queries').queries;
+
 const port = process.env.PORT || 3000;
+
+function getClient() {
+	return new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: {
+			rejectUnauthorized: false
+		}
+	});
+}
+
+function runQuery(query, callback){
+	const client = getClient();
+	client.connect(err => {
+		if (err){
+			client.end();
+			throw err;
+		}
+		client.query(query, (err, res) => {
+			if (err){
+				client.end();
+				throw err;
+			}
+			client.end()
+			callback(res);
+		});
+	});
+}
+
+function getUsers(callback){
+	var users = []
+	try{
+		runQuery(queries['getUsers'], result => {
+			for (let row of result.rows) {
+				users.push(row.column_name);
+			}
+			callback(users);
+		})
+	}catch(error){
+		console.log(error)
+		console.log('catch');
+	}
+}
+
+function getShows(user, callback){
+	var shows = []
+	try{
+		runQuery(queries['getShows'].replace('[USER]', user), result => {
+			for (let row of result.rows) {
+				shows.push(row[user]);
+			}
+			callback(shows);
+		})
+	}catch(error){
+		console.log(error)
+		console.log('catch');
+	}
+}
+
+function saveShow(user, show, callback){
+	runQuery(queries['saveShow'].replace('[USER]', user).replace('[SHOW]', show), result => {
+		callback();
+	})
+}
+
+function removeShow(user, show, callback){
+	runQuery(queries['deleteShow'].replace('[USER]', user).replace('[SHOW]', show), result => {
+		callback();
+	})
+}
+
+function removeUser(user, callback){
+	runQuery(queries['deleteUser'].replace('[USER]', user), result => {
+		callback();
+	})
+}
 
 app.set('view engine','ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true}))
 
 app.get('/',function(req,res){
-	fs.readdir('public/users/', function(err,items){
-		res.render('user',{users:items})
-	})
+	getUsers(function(users){
+		res.render('user',{users: users})
+	});
 })
 
 app.post('/add', function(req,res){
 	res.redirect('/home?user='+req.body.name)
 })
 
+app.post('/delete', function(req,res){
+	var user = req.body.user
+	removeUser(user, () => {
+			res.redirect('/');
+		})
+})
+
 app.get('/home', function (req, res) {
 	var user = req.query.user
-	fs.appendFile('public/users/'+user+".txt", '',function(err){
-		if(!err){
-
-			fs.readFile('public/users/'+user+".txt",function(err,data){
-				if(!err){
-					var myShows=[]
-					if(data != '')
-						myShows = JSON.parse(data)
-					var listeps={}
-					async.each(myShows, function(item,callback){
-						let url = "https://www.episodate.com/api/show-details?q="+item
-						request(url, function (err,response, body){
-							if(!err){
-								let text = JSON.parse(body)
-								var name = text.tvShow.name
-								var air={}
-								if(text.tvShow.countdown!==null) air=text.tvShow.countdown
-									if(air!==null)air["id"]=text.tvShow.id;
-								air['show_name']=name;
-								air['image'] = text.tvShow.image_path
-								listeps[name] = air
-								callback()
-							}
-						})
-					},function(err){
-						res.render('index',{shows: listeps, error: false, results: null,search:null,page:null, user:user})
+	getShows(user, function(myShows){
+		var listeps={}
+		async.each(myShows, function(item, callback){
+			if(item){
+				let url = "https://www.episodate.com/api/show-details?q="+item
+				request(url, function (err,response, body){
+					if(!err){
+						let text = JSON.parse(body)
+						var name = text.tvShow.name
+						var air={}
+						if(text.tvShow.countdown) air=text.tvShow.countdown
+							if(air)
+								air["id"]=text.tvShow.id;
+							air['show_name']=name;
+							air['image'] = text.tvShow.image_path
+							listeps[name] = air
+							callback()
+						}
 					})
-				}
-			})
-		}
-	})
+			}else{
+				callback()
+			}
+		},function(err){
+			res.render('index',{shows: listeps, error: false, results: null,search:null,page:null, user:user})
+		})
+	});
 })
+
 app.get('/search', function (req, res) {
 	var user = req.query.user
 	var name = req.query.searchname
@@ -75,18 +156,8 @@ app.post('/save', function(req,res){
 	var user = req.body.user
 	var tosave = req.body.selected
 	if(tosave){
-		fs.readFile('public/users/'+user+".txt",function(err,data){
-			if(!err){
-				var list =[]
-				if(data!='')
-					list = JSON.parse(data)
-				list = list.concat(tosave)
-				fs.writeFile('public/users/'+user+".txt",JSON.stringify(list),function(err){
-					if(!err){
-						res.redirect('/home?user='+user)
-					}
-				})
-			}
+		saveShow(user, tosave, () => {
+			res.redirect('/home?user='+user)
 		})
 	}else{
 		res.redirect('/home?user='+user)
@@ -96,18 +167,8 @@ app.post('/remove', function(req,res){
 	var user = req.body.user
 	var torem = req.body.selected
 	if(torem){
-		fs.readFile('public/users/'+user+".txt",function(err,data){
-			if(!err){
-				var list =[]
-				if(data!='')
-					list = JSON.parse(data)
-				list = list.filter( ( el ) => !torem.includes( el ) );
-				fs.writeFile('public/users/'+user+".txt",JSON.stringify(list),function(err){
-					if(!err){
-						res.redirect('/home?user='+user)
-					}
-				})
-			}
+		removeShow(user, torem, () => {
+			res.redirect('/home?user='+user)
 		})
 	}else{
 		res.redirect('/home?user='+user)

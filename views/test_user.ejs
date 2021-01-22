@@ -2,9 +2,9 @@
 if(allusers !== null){
 	for(item in allusers){
 		%>
-		<a href='home?user=<%=allusers[item].substring(0,allusers[item].lastIndexOf('.'))%>'>
+		<a href='home?user=<%=allusers[item]%>'>
 			<div class="a_user existing_user">
-				<p><%=allusers[item].substring(0,allusers[item].lastIndexOf('.'))%></p>
+				<p><%=allusers[item]%></p>
 			</div>
 		</a>
 		<%
