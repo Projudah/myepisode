@@ -27,10 +27,9 @@ if(Object.keys(next_show).length){%>
 		setTimeout("location.reload(true);",timeoutPeriod);
 	}
 	const now = new Date();
-	const thirty = 1800000;
 	const nextShow = new Date("<%=next_show['air_date']%>");
 	const timeToNext = (nextShow-now)+60000 //Arbitrarily adding a minute buffer for API to update times
-	window.onload = timedRefresh(Math.min(thirty, timeToNext || thirty));
+	window.onload = timedRefresh(timeToNext);
 </script>
 <%
 }
